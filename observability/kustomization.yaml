@@ -7,3 +7,19 @@ helmCharts:
     version: 62.3.1
     releaseName: prometheus
     valuesFile: prom-values.yaml
+  - name: jaeger
+    repo: https://jaegertracing.github.io/helm-charts
+    version: 3.3.1
+    releaseName: jaeger
+    namespace: observability
+    valuesInline:
+      provisionDataStore:
+        cassandra: false
+      allInOne:
+        enabled: true # Uses in-memory storage (good for testing/local)
+  - name: kiali-server
+    repo: https://kiali.org/helm-charts
+    version: 1.89.0
+    releaseName: kiali
+    namespace: observability
+    valuesFile: kiali-values.yaml

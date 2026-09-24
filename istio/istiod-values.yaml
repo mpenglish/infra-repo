@@ -1,0 +1,20 @@
+pilot:
+  autoscaleEnabled: true
+  autoscaleMin: 2
+  autoscaleMax: 5
+  replicaCount: 2
+global:
+  proxy:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+meshConfig:
+  defaultProviders:
+    tracing:
+    - "zipkin"
+  extensionProviders:
+  - name: "zipkin"
+    zipkin:
+      service: "jaeger-collector.observability.svc.cluster.local"
+      port: 9411

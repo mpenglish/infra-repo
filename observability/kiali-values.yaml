@@ -1,0 +1,14 @@
+auth:
+  strategy: anonymous # Bypass login for local development
+external_services:
+  prometheus:
+    # Points to the Prometheus service created by kube-prometheus-stack
+    url: "http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local:9090"
+  grafana:
+    enabled: true
+    # Points to your Grafana service
+    url: "http://prometheus-grafana.observability.svc.cluster.local:80"
+  tracing:
+    enabled: true
+    provider: "jaeger"
+    in_cluster_url: "http://jaeger-query.observability.svc.cluster.local:16686"
