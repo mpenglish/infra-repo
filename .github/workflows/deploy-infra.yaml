@@ -1,0 +1,40 @@
+name: Publish Infrastructure Platform
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'apps/**'
+      - 'istio/**'
+      - 'metallb/**'
+      - 'observability/**'
+
+jobs:
+  publish-infra:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up ORAS CLI
+        uses: oras-project/setup-oras@v1
+        with:
+          version: 1.2.0
+
+      - name: Package Manifests
+        run: tar -czvf /tmp/infra-manifests.tar.gz .
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PAT }}" | oras login registry-1.docker.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push OCI Artifact
+        run: |
+          SHA_TAG=${GITHUB_SHA::7}
+          
+          # Push a specific versioned tag for audit history
+          oras push registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/infra-manifests:$SHA_TAG \
+            /tmp/infra-manifests.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip
+            
+          # Push the 'latest' tag for Argo CD to poll
+          oras push registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/infra-manifests:latest \
+            /tmp/infra-manifests.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip

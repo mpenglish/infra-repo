@@ -1,0 +1,24 @@
+# apps/istio-app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-istio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: oci://registry-1.docker.io/markenglish156/infra-manifests
+    targetRevision: latest
+    path: istio # Points to the istio folder in the OCI artifact
+    kustomize:
+      enableHelm: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tenant-a-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: oci://registry-1.docker.io/markenglish156/app-manifests
+    targetRevision: latest
+    path: manifests # The directory packaged by CI
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tenant-a
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
