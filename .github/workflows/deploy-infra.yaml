@@ -33,8 +33,8 @@ jobs:
           
           # Push a specific versioned tag for audit history
           oras push registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/infra-manifests:$SHA_TAG \
-            /tmp/infra-manifests.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip
+            /tmp/infra-manifests.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip --disable-path-validation
             
           # Push the 'latest' tag for Argo CD to poll
           oras push registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/infra-manifests:latest \
-            /tmp/infra-manifests.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip
+            /tmp/infra-manifests.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip --disable-path-validation
