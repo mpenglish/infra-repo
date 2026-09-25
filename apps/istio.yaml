@@ -15,6 +15,17 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      jsonPointers:
+        - /webhooks/0/failurePolicy
+        - /webhooks/1/failurePolicy
+    - group: apps
+      kind: Deployment
+      name: istiod
+      jsonPointers:
+        - /spec/template/spec/containers/0/env
   syncPolicy:
     automated:
       prune: true

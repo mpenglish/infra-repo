@@ -6,6 +6,7 @@ helmCharts:
     repo: https://prometheus-community.github.io/helm-charts
     version: 62.3.1
     releaseName: prometheus
+    includeCRDs: true
     valuesFile: prom-values.yaml
   - name: jaeger
     repo: https://jaegertracing.github.io/helm-charts
@@ -15,6 +16,9 @@ helmCharts:
     valuesInline:
       provisionDataStore:
         cassandra: false
+        elasticsearch: false
+      storage:               # <--- ADD THIS BLOCK
+        type: memory
       agent:
         enabled: false      # <--- Disables the duplicate service
       collector:

@@ -1,5 +1,5 @@
 pilot:
-  autoscaleEnabled: true
+  autoscaleEnabled: false
   autoscaleMin: 2
   autoscaleMax: 5
   replicaCount: 2
