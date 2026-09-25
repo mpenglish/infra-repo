@@ -32,7 +32,7 @@ jobs:
           echo "${{ secrets.DOCKER_PAT }}" | oras login registry-1.docker.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
           
           # Push a specific versioned tag for audit history
-          oras push registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/infra-manifests:$SHA_TAG \
+          oras push registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/infra-manifests:${{ env.SHA_TAG }} \
             /tmp/infra-manifests.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip --disable-path-validation
             
           # Push the 'latest' tag for Argo CD to poll
