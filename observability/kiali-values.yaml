@@ -1,7 +1,5 @@
 auth:
   strategy: anonymous # Bypass login for local development
-login_token:
-  signing_key: "static-gitops-key-12345" # you wouldn't do this in production, you would use a secret and set: signing_key_secret_name: "kiali-managed-secrets"
 external_services:
   prometheus:
     # Points to the Prometheus service created by kube-prometheus-stack
