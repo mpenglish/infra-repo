@@ -3,6 +3,8 @@ kind: PeerAuthentication
 metadata:
   name: default-strict
   namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   mtls:
     mode: STRICT
@@ -12,6 +14,8 @@ kind: PeerAuthentication
 metadata:
   name: argocd-permissive
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   mtls:
     mode: PERMISSIVE
