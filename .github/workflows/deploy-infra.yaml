@@ -8,6 +8,7 @@ on:
       - 'istio/**'
       - 'metallb/**'
       - 'observability/**'
+  workflow_dispatch:
 
 jobs:
   publish-infra:
