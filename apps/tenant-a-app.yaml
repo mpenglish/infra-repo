@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: oci://registry-1.docker.io/markenglish156/app-manifests
+    repoURL: oci://registry-1.docker.io/markenglish156/my-app-manifests
     targetRevision: latest
     path: manifests # The directory packaged by CI
   destination:

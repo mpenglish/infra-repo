@@ -15,6 +15,12 @@ helmCharts:
     valuesInline:
       provisionDataStore:
         cassandra: false
+      agent:
+        enabled: false      # <--- Disables the duplicate service
+      collector:
+        enabled: false      # <--- Disables the standalone collector
+      query:
+        enabled: false
       allInOne:
         enabled: true # Uses in-memory storage (good for testing/local)
   - name: kiali-server

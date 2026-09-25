@@ -11,7 +11,7 @@ helmCharts:
     version: 1.23.0
     releaseName: istiod
     namespace: istio-system
-    valuesFile: istio/istiod-values.yaml
+    valuesFile: istiod-values.yaml
 resources:
   - security.yaml
   - gateway.yaml
